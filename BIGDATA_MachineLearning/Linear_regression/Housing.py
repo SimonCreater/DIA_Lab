@@ -30,9 +30,21 @@ df.columns=['CRIM', 'ZN', 'INDUS', 'CHAS',
 # 13. LSTAT    저소득층 인구 비율 (%)
 # 14. MEDV     자가주택의 중앙값 (단위: 1,000달러)
 # print(df.head())
+
+
+
+
 cols = ['LSTAT', 'INDUS', 'NOX', 'RM', 'MEDV']
 
 scatterplotmatrix(df[cols].values,figsize=(10,8),names=cols,alpha=0.5)
+# 샘플 1 → [1.5, 2.0, 3.2]  # 샘플 단위 (행 기준)
+# 샘플 2 → [2.1, 3.1, 4.3]
+# 샘플 3 → [3.5, 4.5, 5.0]
+# 샘플 4 → [4.0, 5.2, 6.1]
+
+# 특징 1 (Feature 1) → [1.5, 2.1, 3.5, 4.0]  # 특징 단위 (행 기준)
+# 특징 2 (Feature 2) → [2.0, 3.1, 4.5, 5.2]
+# 특징 3 (Feature 3) → [3.2, 4.3, 5.0, 6.1]
 
 
 

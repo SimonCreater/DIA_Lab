@@ -20,4 +20,6 @@ class LinearRegressionGD(object):
 
   def predict(self,X):
     return self.net_input(X)
-    
+  
+
+      
