@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from sklearn.ensemble import RandomForestClassifier  
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder,OneHotEncoder
 train=pd.read_csv('./train.csv')
@@ -62,4 +62,19 @@ test=pd.concat([test.drop(columns=one_hot_cols),test_encoded_df],axis=1)
 test.drop(columns=['ID'],inplace=True)
 
 pred = pd.Series(model.predict(test))
-submit = pd.read_csv('./sample_submission.csv')
+submission_template_path = "./sample_submission.csv" 
+submission_df = pd.read_csv(submission_template_path)
+
+
+submission_df['ID'] = submission_df['ID']
+
+
+
+submission_df['허위매물여부'] = pred.values
+
+
+submission_df.to_csv("submission.csv", index=False)
+
+
+print(submission_df.head())
+
