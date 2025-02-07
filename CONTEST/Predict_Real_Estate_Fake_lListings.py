@@ -3,16 +3,18 @@ import numpy as np
 from xgboost import XGBClassifier  
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-
+from sklearn.impute import KNNImputer
+from imblearn.over_sampling import SMOTE
+smote = SMOTE(random_state=42)
 train = pd.read_csv('./train.csv')
 train.head()
 
 x = train.drop(['ID', '허위매물여부'], axis=1)
 y = train['허위매물여부']
 
-mean_imputer = SimpleImputer(strategy='median')
+imputer = KNNImputer(n_neighbors=5)
 
-columns_fill_median = ['해당층', '총층', '전용면적', '욕실수', '총주차대수']
+columns_fill_median = ['해당층', '총층', '전용면적','방수', '욕실수', '총주차대수']
 
 x[columns_fill_median] = mean_imputer.fit_transform(x[columns_fill_median])
 
@@ -35,8 +37,8 @@ x_encoded_df = pd.DataFrame(x_encoded,  ## NUMpy 배열
 
 x = pd.concat([x.drop(columns=one_hot_cols), x_encoded_df], axis=1)
 print(x_encoded_df)
-
-# XGBoost 모델 적용
+smote = SMOTE(random_state=42)
+x, y = smote.fit_resample(x, y)
 model = XGBClassifier(n_estimators=500, max_depth=5, learning_rate=0.05, random_state=42)
 model.fit(x, y)
 
