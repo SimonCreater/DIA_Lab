@@ -6,6 +6,7 @@ from mlxtend.plotting import scatterplotmatrix
 from LinearRegressionGD import LinearRegressionGD
 from sklearn.preprocessing import StandardScaler,PolynomialFeatures
 from sklearn.linear_model import RANSACRegressor,LinearRegression
+
 df = pd.read_csv('https://raw.githubusercontent.com/rasbt/'
                  'python-machine-learning-book-3rd-edition/'
                  'master/ch10/housing.data.txt',
